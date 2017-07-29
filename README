@@ -1,0 +1,30 @@
+This is a github repository for RFM95 LoRa module compatible with Linkit One
+
+I have modified a few things of the aerospace RadioHead library to make it compatible for LinkIt One board.
+
+Note that the aerospace RadioHead library is a generic library which is supported for various platforms.
+
+But this repository is only compatible with Linkit One board it will not work other boards.
+
+This repository consists of three classes:
+
+1. RHdriver
+
+2. RHspi 
+
+3. RH_RF95
+
+The first and the last class are almost the same as the one in the aerospace RadioHead repository but with a some minor changes 
+which were required especially in the constructor and the implementations of the functions. 
+But the variables and functions are the same.
+
+I modified the SPI classes available in the library and combined them into one single class i.e. RHspi class.
+
+The main problem I was facing during using the aerospace library is that it uses the implementation of the default SPIClass of the
+default SPI library of Arduino.
+
+But since the implementations of the SPI library of Arduino and LinkIt One is diffrent I was facing problems in using this Library.
+
+So here is a modified library which you can use.
+
+ 
