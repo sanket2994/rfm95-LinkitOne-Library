@@ -33,7 +33,7 @@ void RHspi::begin()
     bitOrder=LSBFIRST;
 
   uint8_t divider;
-//doubtfull about this
+
   switch (_frequency) {
     case Frequency1MHz:
     default:
