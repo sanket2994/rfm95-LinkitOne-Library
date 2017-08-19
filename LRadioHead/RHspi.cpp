@@ -1,5 +1,5 @@
 
-#include "RHspi.h"
+#include "LRHspi.h"
 
 RHspi::RHspi(uint8_t slaveSelectPin , Frequency frequency, BitOrder bitOrder,
   DataMode dataMode) :
@@ -61,11 +61,11 @@ void RHspi::begin()
     break;
 
     case Frequency8MHz:
-      divider = SPI_CLOCK_DIV2; 
+      divider = SPI_CLOCK_DIV2; // 4MHz on an 8MHz Arduino
 	  break;
 
     case Frequency16MHz:
-	    divider = SPI_CLOCK_DIV2; 
+	    divider = SPI_CLOCK_DIV2; // Not really 16MHz, only 8MHz. 4MHz on an 8MHz Arduino
 	    break;
 
   }
@@ -101,7 +101,7 @@ uint8_t RHspi::spiWrite(uint8_t reg, uint8_t val)
   uint8_t status =0;
   ATOMIC_BLOCK_START;
   digitalWrite(_slaveSelectPin, LOW);
-  status = SPI.transfer(reg | RH_SPI_WRITE_MASK); //address of the register to write from
+  status = SPI.transfer(reg | RH_SPI_WRITE_MASK); //address of the registerto write from
   SPI.transfer(val);
   digitalWrite(_slaveSelectPin,HIGH);
   ATOMIC_BLOCK_END;
@@ -140,4 +140,19 @@ uint8_t RHspi::digitalPinToInterrupt(uint8_t pin)
     return 0;
   else if(pin==3)
     return 1;
+}
+
+void RHspi::setSpiFrequency(Frequency frequency)
+{
+  _frequency =frequency;
+}
+
+void RHspi::setDataMode(DataMode dataMode)
+{
+  _dataMode=dataMode;
+}
+
+void RHspi::setBitOrder(BitOrder bitOrder)
+{
+  _bitOrder=bitOrder;
 }
