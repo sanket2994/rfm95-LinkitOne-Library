@@ -2,8 +2,8 @@
 #define RHspi_h
 
 
-#include "RadioHead.h"
-#include "RHdriver.h"
+#include "LRadioHead.h"
+#include "LRHdriver.h"
 #define RH_SPI_WRITE_MASK 0x80
 
 class RHspi:public RHdriver
@@ -35,9 +35,10 @@ class RHspi:public RHdriver
         uint8_t spiBurstRead(uint8_t reg, uint8_t *dest,uint8_t len);
         uint8_t spiBurstWrite(uint8_t reg, const uint8_t* src, uint8_t len);
         uint8_t digitalPinToInterrupt(uint8_t pin);
-        //void setSlaveSelectPin(slaveSelectPin);
-        //void attachInterrupt();
-        //void detachInterrupt();
+        void setSpiFrequency(Frequency frequency);
+        void setDataMode(DataMode dataMode);
+        void setBitOrder(BitOrder bitOrder);
+
       protected:
         uint8_t _slaveSelectPin;
         Frequency _frequency;
